@@ -1,4 +1,4 @@
-class container{
+class container {
     public static final int[] neighbour_row = {-1, 0, 1, 0, -1, 1, 1, -1};
     public static final int[] neighbour_col = {0, 1, 0, -1, 1, 1, -1, -1};
     public static final int mod = 1000000009;
@@ -6,7 +6,7 @@ class container{
     public static final int N_INF = Integer.MIN_VALUE;
 }
 
-public class Solution{
+public class Solution {
 
     public static void main(String[] args) {
         Solution obj = new Solution();

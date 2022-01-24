@@ -70,21 +70,14 @@ class TreeBuild:
 
 class SquareBracketToCurlyBracket:
     """ [[ ]] -> {{}} or [] -> {} or [[...[]...]] -> {{..{}..}} """
-
     def __init__(self):
         flag = True
         while flag:
             s = input(
-                "Enter another input OR press any key (except '[') to exit: \n"
+                "Enter input in valid form (e.g., [a, b, c, ...]): \n"
             ).strip()
-            if not s.startswith("["):
-                break
-            pc.copy(self.braceToCurly(s))
+            pc.copy(s.replace("[", "{").replace("]", "}"))
             pc.paste()
-
-    def braceToCurly(self, s):
-        return s.replace("[", "{").replace("]", "}")
-
 
 class ToCharArray:
     def stringToCharArray(self, s):
