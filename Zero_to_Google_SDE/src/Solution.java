@@ -6,14 +6,8 @@ class container{
     public static final int N_INF = Integer.MIN_VALUE;
 }
 
-class Solution extends container {
+public class Solution{
 
-}
-
-/*
-//............................. ~DRIVER CLASS~ ...............................
- */
-public class Solutionn{
     public static void main(String[] args) {
         Solution obj = new Solution();
     }

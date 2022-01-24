@@ -1,4 +1,4 @@
-package Helper;
+package Helper_classes;
 public class TreeNode {
     int val;
     TreeNode left;
