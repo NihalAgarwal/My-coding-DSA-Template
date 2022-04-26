@@ -1,9 +1,17 @@
 package Helper_Classes;
 
-class MyLinkedList {
-    ListNode head;
+public class MyLinkedList {
+    private ListNode head;
 
-    MyLinkedList(String string) {
+    public ListNode getHead() {
+        return head;
+    }
+
+    public void setHead(ListNode head) {
+        this.head = head;
+    }
+
+    public MyLinkedList(String string) {
         ListNode temp = new ListNode(0);
         this.head = temp;
         for (String val : string.replaceAll("[\\[{\\]}]", "").split(",")) {

@@ -12,7 +12,6 @@ public class Tree {
     // Take root node as input, and return the array which was given as input to "buildTree()"
     public static void inorder(TreeNode root) {
         if (root == null) {
-            System.out.print("null" + " ");
             return;
         }
         inorder(root.left);
@@ -73,6 +72,7 @@ public class Tree {
         Deque<TreeNode> kids = new LinkedList<>();
 
         for (String val : string.replaceAll("[\\[{\\]}]", "").split(",")) {
+            val = val.trim();
             if (val.equals("null"))
                 nodes.add(null);
             else

@@ -23,7 +23,8 @@ class TreeBuild:
             self.drawtree(self.deserialize(ar))
             repeat = input("Display another tree, if true 'y' else 'n' : ").strip()
 
-    def deserialize(self, string):
+    @staticmethod
+    def deserialize(string):
         if string == "{}":
             return None
         nodes = [
@@ -40,7 +41,8 @@ class TreeBuild:
                     node.right = kids.pop()
         return root
 
-    def drawtree(self, root):
+    @staticmethod
+    def drawtree(root):
         def height(root):
             return 1 + max(height(root.left), height(root.right)) if root else -1
 
@@ -70,6 +72,7 @@ class TreeBuild:
 
 class SquareBracketToCurlyBracket:
     """ [[ ]] -> {{}} or [] -> {} or [[...[]...]] -> {{..{}..}} """
+
     def __init__(self):
         flag = True
         while flag:
@@ -78,6 +81,7 @@ class SquareBracketToCurlyBracket:
             ).strip()
             pc.copy(s.replace("[", "{").replace("]", "}"))
             pc.paste()
+
 
 class ToCharArray:
     def stringToCharArray(self, s):
@@ -121,4 +125,3 @@ if __name__ == "__main__":
         rep = input(
             "\nDo you want to see 'HELPER MENU', if true 'y' else 'n' : "
         ).strip()
-

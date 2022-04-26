@@ -1,6 +1,6 @@
 package Helper_Classes;
 
-class ListNode {
+public class ListNode {
     public int val;
     public ListNode next;
 
