@@ -1,5 +1,7 @@
 import turtle
 import pyperclip as pc
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 class TreeNode:
@@ -104,6 +106,35 @@ class ToCharArray:
             pc.paste()
             a = input("Coninue, if true 'y' else 'n': ")
 
+class buildMountain:
+    def drawMountain(self, ar):
+        ar.strip()
+        ar = ar[1:-2]
+        arr = []
+
+        for c in ar.split(","):
+            if c.isnumeric():
+                arr.append(int(c))
+
+        if len(arr) == 0:
+            print("given in wrong format")
+
+        x = np.arange(1, len(arr) + 1 )
+        y = np.array( arr )
+        # plotting
+        plt.title("Line graph")
+        plt.xlabel("X axis")
+        plt.ylabel("Y axis")
+        plt.plot(x, y, color ="green", marker='o', markerfacecolor='red' )
+        plt.show()
+
+    def __init__(self):
+        a = "y"
+        while a == "y":
+            ar = input("Enter the array in form of '[...]': \n").strip()
+            self.drawMountain( ar )
+            repeat = input("Display another tree, if true 'y' else 'n' : ").strip()
+
 
 if __name__ == "__main__":
     rep = "y"
@@ -112,6 +143,7 @@ if __name__ == "__main__":
         print("1. Draw Tree (press 1) ")
         print("2. Convert [] to {} (press 2) ")
         print("3. String to CharArray e.g., \"add\" -> \"{'a','d','d'}\" (press 3)")
+        print("4. Print the array in mountain form (press 4)")
         inp = int(input("\nPress enter your choice : "))
         print()
         if inp == 1:
@@ -120,6 +152,8 @@ if __name__ == "__main__":
             t = SquareBracketToCurlyBracket()
         elif inp == 3:
             t = ToCharArray()
+        elif inp == 4:
+            t = buildMountain()
         else:
             exit()
         rep = input(
