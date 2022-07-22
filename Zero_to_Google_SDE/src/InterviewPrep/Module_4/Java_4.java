@@ -1,4 +1,4 @@
-package InterviewPrep.Module_4;
+package Module_4;
 
 class container {
     public static final int[] neighbour_row = {-1, 0, 1, 0, -1, 1, 1, -1};

@@ -1,4 +1,6 @@
-package InterviewPrep.Module_1;
+package Module_1;
+import Helper_Classes.*;
+import java.util.*;
 
 class container {
     public static final int[] neighbour_row = {-1, 0, 1, 0, -1, 1, 1, -1};
@@ -12,7 +14,7 @@ class container {
     }
 }
 
-class Solution extends container {
+class Solution {
 
 }
 
@@ -23,6 +25,7 @@ class Solution extends container {
 
 public class Java_1 {
     public static void main(String[] args) {
-
+        Solution obj = new Solution();
     }
 }
+
