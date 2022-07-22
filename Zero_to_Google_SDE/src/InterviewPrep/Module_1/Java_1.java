@@ -1,4 +1,4 @@
-package Module_1;
+package InterviewPrep.Module_1;
 import Helper_Classes.*;
 import java.util.*;
 
@@ -14,14 +14,9 @@ class container {
     }
 }
 
-class Solution {
+class Solution extends container {
 
 }
-
-/*
-//............................. ~DRIVER CLASS~ ...............................
- */
-
 
 public class Java_1 {
     public static void main(String[] args) {
