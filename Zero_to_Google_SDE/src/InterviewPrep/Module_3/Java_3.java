@@ -4,7 +4,7 @@ import java.util.*;
 class container {
     public static final int[] neighbour_row = {-1, 0, 1, 0, -1, 1, 1, -1};
     public static final int[] neighbour_col = {0, 1, 0, -1, 1, 1, -1, -1};
-    public static final int mod = 1000000009;
+    public static final int mod = 1000000007;
     public static final int INF = Integer.MAX_VALUE;
     public static final int N_INF = Integer.MIN_VALUE;
 
@@ -22,11 +22,3 @@ public class Java_3 {
         Solution obj = new Solution();
     }
 }
-
-/*
-[0,0,0,1]
-[[1,5],[4,1],[1,3],[4,4]]
-4
-2
-4
- */

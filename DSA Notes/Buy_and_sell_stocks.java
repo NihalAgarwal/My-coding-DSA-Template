@@ -27,13 +27,10 @@ class BuyAndSellStockUsingRecursion {
         int n = prices.length;
         Integer[][] memo = new Integer[n][2];
 
-        // Same Approach
         BuyAndSellStocksII(0, n, prices, true, memo);
         BuyAndSellStocksWithCooldown(0, n, prices, true, memo);
         BuyAndSellStocksWithTransactionFee(0, n, prices, fee, true, memo);
-
-        // Same Approach
-        BuyAndSellStocksIII(prices);
+        BuyAndSellStocksIII( 0, n, prices, true,2, new Integer[n][2][3] );
         BuyAndSellStocksIV(prices, k );
     }
 
@@ -62,6 +59,36 @@ class BuyAndSellStockUsingRecursion {
         }
 
         return memo[ind][toBuy ? 0 : 1] = profit;
+    }
+
+    /***
+     *
+     * Another way to solve - Best Time to Buy and Sell Stock II
+     *
+     */
+    public int BuyAndSellStocksII_2(int ind, int n, int[] prices, int canBuy, Integer[][] memo)
+    {
+        if( canBuy == 4 || ind == n )
+            return 0;
+
+        if( memo[ind][canBuy] != null )
+            return memo[ind][canBuy];
+
+        int profit;
+
+        if( canBuy % 2 == 0 )
+        {
+            profit = Math.max( -prices[ind] + BuyAndSellStocksII_2( ind + 1, n, prices, canBuy + 1, memo ),
+                                              BuyAndSellStocksII_2( ind + 1, n, prices, canBuy, memo ) );
+        }
+
+        else
+        {
+            profit = Math.max( prices[ind] + BuyAndSellStocksII_2( ind + 1, n, prices, canBuy + 1, memo ),
+                                             BuyAndSellStocksII_2( ind + 1, n, prices, canBuy, memo ) );
+        }
+
+        return memo[ind][canBuy] = profit;
     }
 
     /***
@@ -122,10 +149,29 @@ class BuyAndSellStockUsingRecursion {
      * Best Time to Buy and Sell Stock III
      *
      */
-    public int BuyAndSellStocksIII(int[] prices)
+    public int BuyAndSellStocksIII( int ind, int n, int[] prices, boolean canBuy, int c, Integer[][][] memo )
     {
-        // TODO
-        return 0;
+        if( c == 0 || ind == n )
+            return 0;
+
+        if( memo[ind][canBuy ? 0 : 1][c] != null )
+            return memo[ind][canBuy ? 0 : 1][c];
+
+        int profit;
+
+        if( canBuy )
+        {
+            profit = Math.max( -prices[ind] + BuyAndSellStocksIII( ind + 1, n, prices, false, c, memo ),
+                    BuyAndSellStocksIII( ind + 1, n, prices, true,  c, memo ) );
+        }
+
+        else
+        {
+            profit = Math.max( prices[ind] + BuyAndSellStocksIII( ind + 1, n, prices, true, c - 1, memo ),
+                    BuyAndSellStocksIII( ind + 1, n, prices, false,  c, memo ) );
+        }
+
+        return memo[ind][canBuy ? 0 : 1][c] = profit;
     }
 
     /***
@@ -155,15 +201,9 @@ class BuyAndSellStockUsingTabulation {
      */
     public BuyAndSellStockUsingTabulation(int[] prices, int fee, int k)
     {
-        int n = prices.length;
-        Integer[][] memo = new Integer[n][2];
-
-        // Same Approach with minute Changes
         BuyAndSellStocksII(prices);
         BuyAndSellStocksWithCooldown(prices);
         BuyAndSellStocksWithTransactionFee(prices, fee);
-
-        // Same Approach with minute Changes
         BuyAndSellStocksIII(prices);
         BuyAndSellStocksIV(prices, k);
     }
