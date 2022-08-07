@@ -28,7 +28,8 @@ public class MinimumSpanningTree {
             graph[ edge[1] ].add( edge[0] );
         }
 
-
+        // TODO
+        return 0;
 
     }
 
