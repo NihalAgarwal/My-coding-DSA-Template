@@ -31,7 +31,7 @@ class BuyAndSellStockUsingRecursion {
         BuyAndSellStocksWithCooldown(0, n, prices, true, memo);
         BuyAndSellStocksWithTransactionFee(0, n, prices, fee, true, memo);
         BuyAndSellStocksIII( 0, n, prices, true,2, new Integer[n][2][3] );
-        BuyAndSellStocksIV(prices, k );
+        BuyAndSellStocksIV(0, n, prices, true, k, new Integer[n][2][k+1] );
     }
 
     /***
@@ -179,10 +179,29 @@ class BuyAndSellStockUsingRecursion {
      * Best Time to Buy and Sell Stock IV
      *
      */
-    public int BuyAndSellStocksIV(int[] prices, int k )
+    public int BuyAndSellStocksIV( int ind, int n, int[] prices, boolean canBuy, int c, Integer[][][] memo )
     {
-        // TODO
-        return 0;
+        if( c == 0 || ind == n )
+            return 0;
+
+        if( memo[ind][canBuy ? 0 : 1][c] != null )
+            return memo[ind][canBuy ? 0 : 1][c];
+
+        int profit;
+
+        if( canBuy )
+        {
+            profit = Math.max( -prices[ind] + BuyAndSellStocksIV( ind + 1, n, prices, false, c, memo ),
+                    BuyAndSellStocksIV( ind + 1, n, prices, true,  c, memo ) );
+        }
+
+        else
+        {
+            profit = Math.max( prices[ind] + BuyAndSellStocksIV( ind + 1, n, prices, true, c - 1, memo ),
+                    BuyAndSellStocksIV( ind + 1, n, prices, false,  c, memo ) );
+        }
+
+        return memo[ind][canBuy ? 0 : 1][c] = profit;
     }
 }
 
@@ -201,11 +220,11 @@ class BuyAndSellStockUsingTabulation {
      */
     public BuyAndSellStockUsingTabulation(int[] prices, int fee, int k)
     {
-        BuyAndSellStocksII(prices);
-        BuyAndSellStocksWithCooldown(prices);
-        BuyAndSellStocksWithTransactionFee(prices, fee);
-        BuyAndSellStocksIII(prices);
-        BuyAndSellStocksIV(prices, k);
+        System.out.println( BuyAndSellStocksII(prices)  );
+        System.out.println( BuyAndSellStocksWithCooldown(prices)    );
+        System.out.println( BuyAndSellStocksWithTransactionFee(prices, fee) );
+        System.out.println( BuyAndSellStocksIII(prices) );
+        System.out.println( BuyAndSellStocksIV(prices, k)   );
     }
 
     /***
@@ -274,8 +293,19 @@ class BuyAndSellStockUsingTabulation {
      */
     public int BuyAndSellStocksIII(int[] prices)
     {
-        // TODO
-        return 0;
+        int n = prices.length;
+        int[][][] dp = new int[n+1][3][2];
+
+        for( int i = n-1; i >= 0; i-- )
+        {
+            for( int k = 1; k < 3; k++ )
+            {
+                dp[i][k][0] = Math.max( -prices[i] + dp[i+1][k][1], dp[i+1][k][0] );
+                dp[i][k][1] = Math.max(  prices[i] + dp[i+1][k-1][0], dp[i+1][k][1] );
+            }
+        }
+
+        return dp[0][2][0];
     }
 
     /***
@@ -285,17 +315,28 @@ class BuyAndSellStockUsingTabulation {
      */
     public int BuyAndSellStocksIV(int[] prices, int k )
     {
-        // TODO
-        return 0;
+        int n = prices.length;
+        int[][][] dp = new int[n+1][k+1][2];
+
+        for( int i = n-1; i >= 0; i-- )
+        {
+            for( int kk = 1; kk < k+1; kk++ )
+            {
+                dp[i][kk][0] = Math.max( -prices[i] + dp[i+1][kk][1], dp[i+1][kk][0] );
+                dp[i][kk][1] = Math.max(  prices[i] + dp[i+1][kk-1][0], dp[i+1][kk][1] );
+            }
+        }
+
+        return dp[0][k][0];
     }
 }
 
 
 public class Buy_and_sell_stocks {
     public static void main(String[] args) {
-        int[] prices = new int[] {};
-        int fee = 0;
-        int k = 0;
+        int[] prices = new int[] { 3,2,6,5,0,3 };
+        int fee = 50;
+        int k = 5;
         BuyAndSellStockUsingRecursion rec_obj = new BuyAndSellStockUsingRecursion( prices, fee, k );
         BuyAndSellStockUsingTabulation tab_obj = new BuyAndSellStockUsingTabulation( prices, fee, k );
     }
