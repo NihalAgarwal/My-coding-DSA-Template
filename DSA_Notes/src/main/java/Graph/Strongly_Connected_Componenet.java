@@ -38,12 +38,20 @@ import java.util.*;
  *              * The elements or vertices which was popped out form the stack, was a part of an SCC whose head is 'u'.
  *
  *      Kosaraju's Algo:
- *
- *
+ *          1) Sort all nodes in order of finishing time -> Topological Sort using DFS
+ *          2) Transpose the graph ( Change the direction of edges )
+ *          3) Pop the element from the stack and do DFS on that element, every element visited during
+ *             that dfs call will be part of that SCC.
+ *          4) Similarly, pop next element from the stack and run dfs (if not visited) on that element to find next SCC.
+ *          5) Till, stack is empty.
  *
  */
 
 public class Strongly_Connected_Componenet {
+    /***
+     *
+     * Tarjan's Algorithm
+     */
     int time;
     public void FindSSCTarjans( int v, ArrayList<ArrayList<Integer>> adj, int[] disc, int[] low, boolean[] withStack, Stack<Integer> st, ArrayList<ArrayList<Integer>> res )
     {
@@ -114,10 +122,80 @@ public class Strongly_Connected_Componenet {
         return res;
     }
 
+    /***
+     *
+     * Kosaraju's Algorithm
+     */
+    public void topSort( int v, ArrayList<ArrayList<Integer>> adj, boolean[] vis, Stack<Integer> st )
+    {
+        vis[v] = true;
+
+        for( int nb : adj.get(v) )
+        {
+            if( !vis[nb] )
+            {
+                topSort( nb, adj, vis, st );
+            }
+        }
+        st.push(v);
+    }
+    public void findSCC( int v, ArrayList<ArrayList<Integer>> adj, boolean[] vis )
+    {
+        vis[v] = true;
+
+        for( int nb : adj.get(v) )
+        {
+            if( !vis[nb] )
+            {
+                findSCC( nb, adj, vis );
+            }
+        }
+    }
     public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj)
     {
-        // TODO
-        return 0;
+        int ans = 0;
+        Stack<Integer> st = new Stack<>();
+        boolean[] vis = new boolean[V];
+
+        // Step 1
+        for( int v = 0; v < V; v++ )
+        {
+            if( !vis[v] )
+            {
+                topSort( v, adj, vis, st );
+            }
+        }
+
+        // Step 2
+        ArrayList<ArrayList<Integer>> transposeGraph = new ArrayList<>();
+
+        for( int i = 0; i < V; i++ )
+        {
+            transposeGraph.add( new ArrayList<>() );
+        }
+
+        for( int from = 0; from < V; from++ )
+        {
+            for( int to : adj.get( from ) )
+            {
+                transposeGraph.get( to ).add( from );
+            }
+        }
+
+        // Step 3
+        Arrays.fill( vis, false );
+
+        while( !st.isEmpty() )
+        {
+            int v = st.pop();
+            if( !vis[v] )
+            {
+                ans++;
+                findSCC( v, transposeGraph, vis );
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -157,8 +235,8 @@ public class Strongly_Connected_Componenet {
             Kosarajus's Algorithm
             https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1
 
-            Time complexity : O ( )
-            Space Complexity : O (  )
+            Time complexity : O ( V + E )
+            Space Complexity : O ( N + E ) -> as we are storing the transpose graph, else O(V)
         */
 
         System.out.println(obj.kosaraju(number_of_vertices, graph));
