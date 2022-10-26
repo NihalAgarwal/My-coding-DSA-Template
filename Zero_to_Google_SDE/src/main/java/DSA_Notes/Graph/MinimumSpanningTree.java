@@ -1,4 +1,6 @@
-package Graph;
+package DSA_Notes.Graph;
+
+
 import java.util.*;
 
 /***

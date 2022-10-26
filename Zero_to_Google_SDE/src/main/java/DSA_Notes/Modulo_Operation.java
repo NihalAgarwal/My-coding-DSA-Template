@@ -1,3 +1,5 @@
+package DSA_Notes;
+
 /****
  *
  * There is a difference between "remainder" and "Modulo" operation. For "%", java returns remainder.

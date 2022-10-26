@@ -1,7 +1,8 @@
+package DSA_Notes;
+
 import java.util.*;
 /***
  *  LeetCode : https://leetcode.com/problems/longest-valid-parentheses/solution/
- *
  */
 
 public class Longest_Valid_Parentheses {

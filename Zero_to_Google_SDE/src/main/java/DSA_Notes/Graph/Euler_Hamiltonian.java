@@ -1,4 +1,4 @@
-package Graph;
+package DSA_Notes.Graph;
 
 /***
  *  Walk : Any random traversal in graph. ( Vertices and edges can be repeated )

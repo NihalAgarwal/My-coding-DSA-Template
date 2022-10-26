@@ -1,3 +1,5 @@
+package DSA_Notes;
+
 /***
  *
  * <a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/">...</a>

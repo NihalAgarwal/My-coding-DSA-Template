@@ -1,4 +1,4 @@
-package String_Matching;
+package DSA_Notes.String_Matching;
 
 /***
  * KMP - Knuth Morris Pattern Match Algorithm

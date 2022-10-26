@@ -1,6 +1,7 @@
+package DSA_Notes;
+
 /***
  * <a href="https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/">...</a>
- *
  * Problem Statement :
  *  Given a matrix and a target, return the number of non-empty matrices that sum to target.
  *  A sub-matrix x1, y1, x2, y2 is the set of all cells' matrix[x][y] with x1 <= x <= x2 and y1 <= y <= y2.
@@ -11,7 +12,7 @@
 
 import java.util.*;
 
-class Scratch {
+class SubArrayWithTargetSum {
 
     public static void main(String[] args) {
 
